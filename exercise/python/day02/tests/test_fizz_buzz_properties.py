@@ -6,7 +6,14 @@ from games.fizz_buzz import FizzBuzz, MIN, MAX
 
 
 class FizzBuzzProperties(unittest.TestCase):
-    fizz_buzz_strings = ["Fizz", "Buzz", "FizzBuzz"]
+    fizz_buzz_strings = [
+        "Fizz", "Buzz", "Whizz", "Bang",  # single words
+        "FizzBuzz", "FizzWhizz", "FizzBang",  # combinations with Fizz
+        "BuzzWhizz", "BuzzBang",  # combinations with Buzz
+        "WhizzBang",  # combinations with Whizz
+        "FizzBuzzWhizz", "FizzBuzzBang", "FizzWhizzBang", "BuzzWhizzBang",  # combinations with three words
+        "FizzBuzzWhizzBang"  # all four words
+    ]
 
     def valid_strings_for(self, x: int) -> list:
         return self.fizz_buzz_strings + [str(x)]
