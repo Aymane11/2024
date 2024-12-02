@@ -2,34 +2,39 @@ from typing import Optional
 
 MIN = 1
 MAX = 100
-FIZZBUZZ = 15
-FIZZ = 3
-BUZZ = 5
 
 
 class FizzBuzz:
+    divisors = {
+        3: "Fizz",
+        5: "Buzz",
+        7: "Whizz",
+        11: "Bang",
+    }
+
     @staticmethod
-    def convert(input: int) -> Optional[str]:
-        if FizzBuzz.is_out_of_range(input):
+    def convert(input_num: int) -> Optional[str]:
+        if FizzBuzz.is_out_of_range(input_num):
             return None
         else:
-            return FizzBuzz.convert_safely(input)
+            return FizzBuzz.convert_safely(input_num)
 
     @staticmethod
-    def convert_safely(input: int) -> str:
-        if FizzBuzz.is_divisible_by(FIZZBUZZ, input):
-            return "FizzBuzz"
-        elif FizzBuzz.is_divisible_by(FIZZ, input):
-            return "Fizz"
-        elif FizzBuzz.is_divisible_by(BUZZ, input):
-            return "Buzz"
+    def convert_safely(input_num: int) -> str:
+        output = ""
+        for divisor in FizzBuzz.divisors:
+            if FizzBuzz.operator(divisor, input_num):
+                output += FizzBuzz.divisors[divisor]
+
+        if output == "":
+            return str(input_num)
         else:
-            return str(input)
+            return output
 
     @staticmethod
-    def is_divisible_by(divisor: int, input: int) -> bool:
-        return input % divisor == 0
+    def operator(divisor: int, input_num: int) -> bool:
+        return input_num % divisor == 0
 
     @staticmethod
-    def is_out_of_range(input: int) -> bool:
-        return input < MIN or input > MAX
+    def is_out_of_range(input_num: int) -> bool:
+        return input_num < MIN or input_num > MAX
